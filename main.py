@@ -44,15 +44,18 @@ async def get_towers(
     - Read-only access.
     - Does not modify or create infrastructure records.
     """
+    params = {"limit": limit}
+
+    if state:
+        params["state"] = state
+
+    if technology:
+        params["technology"] = technology    
 
     async with httpx.AsyncClient(timeout=10.0) as client:
         resp = await client.get(
             f"{API_BASEURL}/towers",
-            params={
-                "state": state,
-                "technology": technology,
-                "limit": limit
-            }
+            params= params
         )
         resp.raise_for_status()
         return resp.json()
@@ -118,15 +121,17 @@ async def get_complaints(
     - Read-only.
     - No personal customer-identifying information is exposed.
     """
+    params = {"limit": limit}
+    if state:
+        params["state"] = state
+
+    if tower_id:
+        params["tower_id"] = tower_id
 
     async with httpx.AsyncClient(timeout=10.0) as client:
         resp = await client.get(
             f"{API_BASEURL}/complaints",
-            params={
-                "state": state,
-                "tower_id": tower_id,
-                "limit": limit
-            }
+            params=params
         )
         resp.raise_for_status()
         return resp.json()
