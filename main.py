@@ -9,7 +9,7 @@ You MUST only use the provided tools.
 Do NOT fabricate data.""")
 
 
-API_BASEURL = "https://soumyaj-mcmcfastapi.hf.space/"
+API_BASEURL = "https://soumyaj-mcmcfastapi.hf.space"
 
 @mcp.tool()
 async def get_towers(
