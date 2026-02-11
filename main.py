@@ -45,7 +45,7 @@ async def get_towers(
     - Does not modify or create infrastructure records.
     """
 
-    with httpx.AsyncClient(timeout=10.0) as client:
+    async with httpx.AsyncClient(timeout=10.0) as client:
         resp = await client.get(
             f"{API_BASEURL}/towers",
             params={
@@ -82,7 +82,7 @@ async def get_tower_by_id(tower_id: int):
     - No infrastructure changes are possible.
     """
 
-    with httpx.AsyncClient(timeout=10.0) as client:
+    async with httpx.AsyncClient(timeout=10.0) as client:
         resp = await client.get(f"{API_BASEURL}/towers/{tower_id}")
         resp.raise_for_status()
         return resp.json()
@@ -119,7 +119,7 @@ async def get_complaints(
     - No personal customer-identifying information is exposed.
     """
 
-    with httpx.AsyncClient(timeout=10.0) as client:
+    async with httpx.AsyncClient(timeout=10.0) as client:
         resp = await client.get(
             f"{API_BASEURL}/complaints",
             params={
